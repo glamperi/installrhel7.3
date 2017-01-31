@@ -9,13 +9,13 @@ openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 
 containerized=true
 openshift_release=v3.4
 #openshift_image_tag=v1.4.0
-openshift_public_hostname=master.myhost.io
-openshift_master_default_subdomain=apps.master.myhost.io
+openshift_public_hostname=master.<X.X.X.X>.xip.io
+openshift_master_default_subdomain=apps.master.<X.X.X.X>.xip.io
 openshift_hosted_metrics_deploy=false
 
 
 [masters]
-master.myhost.io openshift_schedulable=true
+master.<X.X.X.X>.xip.io openshift_schedulable=true
 
 [nodes]
-master.myhost.io openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
+master.<X.X.X.X>.xip.io openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
