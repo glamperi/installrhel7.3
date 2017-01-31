@@ -13,7 +13,7 @@ This Openshift install uses ansible, and the enterprise release, which is curren
 6. git clone https://github.com/openshift/openshift-ansible
 7. git clone https://github.com/glamperi/installrhel7.3
 8. edit the inventory.erb file in the installrhel7.3 folder, change the master so it resolves to some other name for your RHEL Instance.
-9. Edit /etc/hosts and add the master node name(master.<X.X.X.X>.xip.io) and the <X.X.X.X> is your IP addr (ip addr show) of host with the hostname. Do not use the loop back address for this, the purpose is to be routable with the xip.io DNS Server, see xip.io, if you are not familar with how this works. Also, make sure that the hostname and the master in the inventory.erb file are identical. Edit /etc/hostname and change the hostname, if not.
+9. Edit /etc/hosts and add the master node name(master.YOURIPADDR.xip.io) and the <X.X.X.X> is your IP addr (ip addr show) of host with the hostname. Do not use the loop back address for this, the purpose is to be routable with the xip.io DNS Server, see xip.io, if you are not familar with how this works. Also, make sure that the hostname and the master in the inventory.erb file are identical. Edit /etc/hostname and change the hostname, if not.
 10. ssh-keygen -t rsa and then copy the key using 'ssh-copy-id root@master.<X.X.X.X>.xip.io'
 11. ssh root@master.<X.X.X.X>.xip.io 
 12. run the ansible script - ansible-playbook -i  installrhel7.3/inventory.erb ./openshift-ansible/playbooks/byo/config.yml
