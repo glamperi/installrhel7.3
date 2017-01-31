@@ -1,6 +1,6 @@
 Install of Openshift 3.4 using the ansible installer and the xip.io DNS Service
 
-This Openshift install uses ansible, and the enterprise release, which is currently 3.4.  To speed up the getting starting process, instead of connecting to your DNS Server, We are using the xip.io, if you are not familar with xip.io, you can click on the link to learn some on that.  Basically, you can modify the hostname and DNS Server configuration after the install to use your Enterprise DNS Server.
+This Openshift install uses ansible, and the enterprise release, which is currently 3.4.  To speed up the getting started process, instead of connecting to your DNS Server, We are using the xip.io, if you are not familar with xip.io, you can click on the link to learn how it works.  Basically, you can modify the hostname and DNS Server configuration after the install to use your Enterprise DNS Server. This is an alternative to 'oc cluster' or CDK.  It allows you to get up quickly and perhaps install some heavier features in a larger VM.  Once Ansible is installed in the VM, you can also use ansible to install in one of your public cloud environments using the playbooks at the openshift-ansible git repo in step #6.  The remainder of the Readme is the steps for the install and post install.
 
 1. Install the RHEL 7.3 ISO 
 2. subscription-manager register or use the RHEL install UI to register, make sure to set the network to stay alway on.  Otherwise, you will need to set the device to up in the folder '/etc/sysconfig/network-scripts'.
