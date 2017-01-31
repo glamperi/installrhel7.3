@@ -16,9 +16,8 @@ Install of Openshift 3.4 using the ansible installer and the xip.io DNS Service
 11. ssh root@master.myhost.io 
 12. run the ansible script - ansible-playbook -i  installrhel7.3/inventory.erb ./openshift-ansible/playbooks/byo/config.yml
 13. to Uninstall, run -  ansible-playbook -i  installrhel7.3/inventory.erb /home/gary/openshift-ansible/playbooks/adhoc/uninstall.yml, if changing the hostname, it is best to uninstall before, or else the ansible script will not be able to ssh in.  You might have to do systemctl stop atomic-openshift-master or systemctl stop atomic-openshift-node.
-14. cd /etc/origin/master
-15. htpasswd -b /etc/origin/master/htpasswd developer developer
-16. oc login -u system:admin --config=/etc/origin/master/admin.kubeconfig
+14. Post Install step, you will need a user to login as to the terminal or web console: cd /etc/origin/master and run 'htpasswd -b /etc/origin/master/htpasswd developer developer', this creates the same user as the 'oc cluster' uses by default in the setup.
+16. For OADM commands use: oc login -u system:admin --config=/etc/origin/master/admin.kubeconfig
 
 
 
