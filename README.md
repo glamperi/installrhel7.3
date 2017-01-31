@@ -1,4 +1,4 @@
-Install of Openshift 3.4 using the ansible installer
+Install of Openshift 3.4 using the ansible installer and the xip.io DNS Service
 
 1. Install the RHEL 7.3 ISO 
 2. subscription-manager register or use the RHEL install UI to register, make sure to set the network to stay alway on.  Otherwise, you will need to set the device to up in the folder '/etc/sysconfig/network-scripts'.
@@ -11,11 +11,11 @@ Install of Openshift 3.4 using the ansible installer
 6. git clone https://github.com/openshift/openshift-ansible
 7. git clone https://github.com/glamperi/installrhel7.3
 8. edit the inventory.erb file in the installrhel7.3 folder, change the master so it resolves to some other name for your RHEL Instance.
-9. Edit /etc/hosts and add the master node name(master.myhost.io) and the IP addr (ip addr show) of host with the hostname. It does not seem to work with the loopback IP address. Also, make sure that the hostname and the master in the inventory.erb file are identical.
-10. ssh-keygen -t rsa
+9. Edit /etc/hosts and add the master node name(master.<X.X.X.X>.xip.io) and the X.X.X.X is your IP addr (ip addr show) of host with the hostname. Do not use the loop back address for this, the purpose is to be routable with the xip.io DNS Server, see xip.io, if you are not familar with how this works. Also, make sure that the hostname and the master in the inventory.erb file are identical. Edit /etc/hostname and change the hostname, if not.
+10. ssh-keygen -t rsa and then copy the key using 'ssh-copy-id root@master.<X.X.X.X>.xip.io'
 11. ssh root@master.myhost.io 
 12. run the ansible script - ansible-playbook -i  installrhel7.3/inventory.erb ./openshift-ansible/playbooks/byo/config.yml
-13. to Uninstall, run -  ansible-playbook -i  installrhel7.3/inventory.erb /home/gary/openshift-ansible/playbooks/adhoc/uninstall.yml 
+13. to Uninstall, run -  ansible-playbook -i  installrhel7.3/inventory.erb /home/gary/openshift-ansible/playbooks/adhoc/uninstall.yml, if changing the hostname, it is best to uninstall before, or else the ansible script will not be able to ssh in.  You might have to do systemctl stop atomic-openshift-master or systemctl stop atomic-openshift-node.
 14. cd /etc/origin/master
 15. htpasswd -b /etc/origin/master/htpasswd developer developer
 16. oc login -u system:admin --config=/etc/origin/master/admin.kubeconfig
