@@ -1,0 +1,29 @@
+[OSEv3:children]
+masters
+nodes
+
+[OSEv3:vars]
+ansible_ssh_user=root
+deployment_type=openshift-enterprise
+openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
+containerized=true
+#openshift_release=3.4
+#openshift_image_tag=v1.4.0
+openshift_public_hostname=master.172.16.15.212.xip.io
+openshift_master_default_subdomain=apps.172.16.15.212.xip.io
+openshift_hosted_metrics_deploy=true
+logging_master_public_url=master.172.16.15.212.xip.io
+openshift_hosted_metrics_public_url=metrics.172.16.15.212.xip.io
+openshift_metrics_master_url=master.172.16.15.212.xip.io
+
+#openshift_hosted_logging_deploy=true
+
+[masters]
+master.172.16.15.212.xip.io openshift_schedulable=true
+
+# host group for etcd
+#[etcd]
+#master.glamp.io
+
+[nodes]
+master.172.16.15.212.xip.io openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
