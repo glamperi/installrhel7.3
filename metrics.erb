@@ -6,8 +6,10 @@ nodes
 ansible_ssh_user=root
 deployment_type=openshift-enterprise
 openshift_master_identity_providers=[{'name': 'htpasswd_auth', 'login': 'true', 'challenge': 'true', 'kind': 'HTPasswdPasswordIdentityProvider', 'filename': '/etc/origin/master/htpasswd'}]
-containerized=true
-#openshift_release=3.4
+# When trying to install cockpit, containerized needs to be false, from reading the playbook
+containerized=false
+#seems to require the enterprise release version - v3.4 is current at this time
+openshift_release=v3.4
 #openshift_image_tag=v1.4.0
 openshift_public_hostname=master.<X.X.X.X>.xip.io
 openshift_master_default_subdomain=apps.<X.X.X.X>.xip.io
@@ -16,14 +18,16 @@ logging_master_public_url=master.<X.X.X.X>.xip.io
 openshift_hosted_metrics_public_url=metrics.<X.X.X.X>.xip.io
 openshift_metrics_master_url=master.<X.X.X.X>.xip.io
 
+# Still Debugging Logging! - x509 cert issues  
 #openshift_hosted_logging_deploy=true
+  
+# cockpit-ui per openshift_hosted.yml
+openshift.common.version_gte_3_3_or_1_3=true
 
 [masters]
 master.172.16.15.212.xip.io openshift_schedulable=true
 
-# host group for etcd
-#[etcd]
-#master.glamp.io
+
 
 [nodes]
 master.172.16.15.212.xip.io openshift_node_labels="{'region': 'infra', 'zone': 'default'}" openshift_schedulable=true
